@@ -1,5 +1,5 @@
 export async function genIndexContent() {
-  const dataResponse = await fetch(`/page-data/menifest.json`);
+  const dataResponse = await fetch(`../../page-data/menifest.json`);
   const data = await dataResponse.json();
   console.log(data);
 

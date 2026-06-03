@@ -2,11 +2,11 @@ import { marked } from "https://cdn.osyb.cn/npm/marked/lib/marked.esm.js"
 
 
 export async function genArticleContent(pageID) {
-  const dataResponse = await fetch(`/page-data/menifest.json`);
+  const dataResponse = await fetch(`../../page-data/menifest.json`);
   const data = await dataResponse.json();
   const pageData = data[pageID];
 
-  const contentResponse = await fetch(`/page-data/${pageID}.md`);
+  const contentResponse = await fetch(`../../page-data/${pageID}.md`);
   const passageMarkdown = await contentResponse.text();
 
   const markdownParsed = marked.parse(passageMarkdown);
