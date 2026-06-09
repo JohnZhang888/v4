@@ -18,3 +18,12 @@ content {
 .markdownContent img {
   max-width: 100%;
 }
+
+.markdownContent,
+.markdownContent p,
+.markdownContent a,
+.markdownContent li,
+.markdownContent blockquote {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}

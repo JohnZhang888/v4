@@ -16,14 +16,70 @@
     <!-- To automatically render math in text elements, include the auto-render extension: -->
     <script defer src="https://cdn.osyb.cn/npm/katex@0.17.0/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
         onload="renderMathInElement(document.body);"></script>
+    <script>
+      (function() {
+        const match = document.cookie.match(/(?:^|;\s*)themeMode=([^;]+)/);
+        const stored = match ? decodeURIComponent(match[1]) : 'auto';
+        const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const mode = stored === 'dark' || stored === 'light' ? stored : preferred;
+        document.documentElement.classList.remove('light', 'dark');
+        document.documentElement.classList.add(mode);
+      })();
+    </script>
     <link rel="stylesheet" type="text/css" href="styles/main.css">
     
     <title>Document</title>
   </head>
-  <body class="light">
+  <body>
     <div class="topbar">
-      <a href="./"><img src="resources/logo-light.svg" height="32px"></a>
+      <a href="./" class="topbar-logo" aria-label="首页">
+        <span class="logo-image" aria-hidden="true"></span>
+      </a>
+      <div class="topbar-actions">
+        <button class="topbar-button topbar-menu-button" type="button" aria-label="打开侧边栏">
+          <i class="bi bi-list"></i>
+        </button>
+        <a class="topbar-button topbar-link-button" href="https://johnzhang888.github.io/">
+          <i class="bi bi-house-door-fill"></i>
+          <span>主站</span>
+        </a>
+        <div class="topbar-dropdown">
+          <button class="topbar-button topbar-theme-button" type="button" aria-haspopup="true" aria-expanded="false">
+            <i class="topbar-theme-icon bi bi-laptop"></i>
+            <span class="topbar-theme-label">跟随浏览器</span>
+            <i class="bi bi-caret-down-fill dropdown-caret"></i>
+          </button>
+          <div class="topbar-dropdown-menu" hidden>
+            <button class="topbar-dropdown-item" data-theme="auto" type="button">
+              <i class="bi bi-laptop"></i>
+              <span>跟随浏览器</span>
+            </button>
+            <button class="topbar-dropdown-item" data-theme="light" type="button">
+              <i class="bi bi-sun-fill"></i>
+              <span>浅色</span>
+            </button>
+            <button class="topbar-dropdown-item" data-theme="dark" type="button">
+              <i class="bi bi-moon-fill"></i>
+              <span>深色</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <div class="mobile-drawer-scrim" hidden></div>
+    <div class="mobile-drawer" hidden>
+      <div class="drawer-header">
+        <div class="drawer-tabs">
+          <button class="drawer-tab drawer-tab-active" type="button" data-drawer-tab="list">文章列表</button>
+          <button class="drawer-tab" type="button" data-drawer-tab="toc">目录</button>
+        </div>
+        <button class="drawer-close-button" type="button" aria-label="关闭侧边栏"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="drawer-panel drawer-panel-list"></div>
+      <div class="drawer-panel drawer-panel-toc" hidden></div>
+    </div>
+
     <content></content>
     <script type="module" src="src/gen/main.js"></script>
     <script type="module" src="src/copy-markdown.js"></script>

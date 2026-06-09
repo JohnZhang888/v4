@@ -85,3 +85,5 @@ function buildRightBar(markdownText) {
   }
   return html;
 }
+
+export { buildLeftBar, buildRightBar, sortPageEntries };
